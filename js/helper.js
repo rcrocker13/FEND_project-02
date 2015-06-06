@@ -49,7 +49,8 @@ var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
 var HTMLschoolMajor = '<em><br>Major: %data%</em>';
 
-var HTMLonlineClasses = '<h3>Online Classes</h3>';
+var HTMLonlineClasses = '<h3 id="onlineCourse">Online Classes</h3>';
+var HTMLonlineStart = '<div class="course-entry"></div>';
 var HTMLonlineTitle = '<a href="#">%data%';
 var HTMLonlineSchool = ' - %data%</a>';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
@@ -64,8 +65,11 @@ The International Name challenge in Lesson 2 where you'll create a function that
 */
 $(document).ready(function() {
   $('button').click(function() {
-    var iName = inName() || function(){};
-    $('#name').html(iName);  
+    var iName = inName() || function(){
+      var nameArray = $("#name").text().split();
+      iName = nameArray[1].toUpperCase();
+    };
+    $('#name').html(iName);
   });
 });
 
@@ -86,6 +90,7 @@ function logClicks(x,y) {
 
 $(document).click(function(loc) {
   // your code goes here!
+  logClicks(loc.pageX, loc.pageY);
 });
 
 
@@ -157,6 +162,7 @@ function initializeMap() {
     // marker is an object with additional data about the pin for a single location
     var marker = new google.maps.Marker({
       map: map,
+      //animation: google.maps.Animation.DROP,
       position: placeData.geometry.location,
       title: name
     });
@@ -165,12 +171,14 @@ function initializeMap() {
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: name
+      content: "<div id='firstHeading'>" + marker.title + "</div>" +
+        "<div class='content'>" + marker.position + "</div>"
     });
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      infoWindow.open(map, marker);
     });
 
     // this is where the pin actually gets added to the map.
@@ -233,7 +241,7 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
