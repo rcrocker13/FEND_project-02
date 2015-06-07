@@ -110,7 +110,7 @@ var education = {
 // Below the elements are added to the DOM
 
 // add title and role to the page
-function displayBio() {
+bio.display = function() {
 	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 	$("#header").prepend(formattedRole);
 
@@ -157,10 +157,10 @@ function displayBio() {
 	 }
 }
 
-displayBio();
+bio.display();
 
 // add work related details
-function displayWork() {
+work.display = function() {
 	for (job in work.jobs) {
 	 	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
 	 	var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
@@ -177,11 +177,11 @@ function displayWork() {
 	}
 }
 
-displayWork();
+work.display();
 
 
 // add projects
-function displayProjects() {
+projects.display = function() {
 	for (project in projects.projects) {
 	 	var projTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
 	 	var projDates = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
@@ -196,11 +196,11 @@ function displayProjects() {
 	}
 }
 
-displayProjects();
+projects.display();
 
 
 // add education
-function displayEducation() {
+education.display = function() {
 	// add formal education
 	for (school in education.schools) {
 		var schoolName = HTMLschoolName.replace("%data%", education.schools[school].name)
@@ -233,7 +233,7 @@ function displayEducation() {
 	}
 }
 
-displayEducation();
+education.display();
 
 // function returning a list of locations where I've worked
 function locationizer(work) {
