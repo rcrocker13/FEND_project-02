@@ -162,7 +162,7 @@ function initializeMap() {
     // marker is an object with additional data about the pin for a single location
     var marker = new google.maps.Marker({
       map: map,
-      //animation: google.maps.Animation.DROP,
+      animation: google.maps.Animation.DROP,
       position: placeData.geometry.location,
       title: name
     });
@@ -171,8 +171,7 @@ function initializeMap() {
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: "<div id='firstHeading'>" + marker.title + "</div>" +
-        "<div class='content'>" + marker.position + "</div>"
+      content: "<div id='firstHeading'>" + marker.title + "</div>"
     });
 
     // hmmmm, I wonder what this is about...
